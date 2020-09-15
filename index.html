@@ -29,6 +29,7 @@
         5: '😲', // surprise
         6: '😐' // neutral
       }
+    };
 
     button.onclick = function() {
         w = video.videoWidth;
@@ -42,7 +43,7 @@
 
         span.innerHTML = '⌛';
         predict();
-    };
+    }
 
     function handleSuccess(stream) {
       video.srcObject = stream;
