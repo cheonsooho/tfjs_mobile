@@ -7,43 +7,17 @@
   </head>
   <body>
     <video playsinline autoplay></video>
-    <button>Take snapshot</button>
+<button>Take snapshot</button>
     <canvas></canvas>
-    <span></span>
     <script>
     video = document.querySelector('video');
     canvas = document.querySelector('canvas');
     button = document.querySelector('button');
-    canvas.width = 48;
-    canvas.height = 48;
-    canvas.style.filter = 'grayscale(1)';
-    video.style.transform = 'scaleX(-1)';
-
-    span = document.querySelector('span');
-    span.style.fontSize = '48px';
-
-    const LABELS = {
-      0: '🤬', // angry
-      1: '🤢', // disgust
-      2: '😱', // fear
-      3: '😄', // happy
-      4: '😢', // sad
-      5: '😲', // surprise
-      6: '😐' // neutral
-    }
 
     button.onclick = function() {
-        w = video.videoWidth;
-        h = video.videoHeight;
-        s = Math.min(w, h);
-        sx = (w-s)/2;
-        sy = (h-s)/2;
-
-        canvas.getContext('2d').drawImage(video, sx=sx, sy=sy, swidth=s,
-          sheight=s, x=0, y=0, width=48, height=48);
-
-        span.innerHTML = '⌛';
-        predict();
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
     };
     
     async function predict() {
