@@ -11,6 +11,15 @@
     <canvas></canvas>
     <span></span>
     <script>
+    video = document.querySelector('video');
+    canvas = document.querySelector('canvas');
+    button = document.querySelector('button');
+
+    button.onclick = function() {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+    };
       video = document.querySelector('video');
       canvas = document.querySelector('canvas');
       canvas.width = 48;
