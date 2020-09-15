@@ -11,21 +11,13 @@
     <canvas></canvas>
     <span></span>
     <script>
-    video = document.querySelector('video');
-    canvas = document.querySelector('canvas');
-    button = document.querySelector('button');
-
-    button.onclick = function() {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas.getContext('2d').drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-    };
       video = document.querySelector('video');
       canvas = document.querySelector('canvas');
       canvas.width = 48;
       canvas.height = 48;
       canvas.style.filter = 'grayscale(1)';
       video.style.transform = 'scaleX(-1)';
+
       span = document.querySelector('span');
       span.style.fontSize = '48px';
 
@@ -38,8 +30,6 @@
         5: '😲', // surprise
         6: '😐' // neutral
       }
-    };
-
     button.onclick = function() {
         w = video.videoWidth;
         h = video.videoHeight;
@@ -52,7 +42,7 @@
 
         span.innerHTML = '⌛';
         predict();
-    }
+    };
 
     function handleSuccess(stream) {
       video.srcObject = stream;
