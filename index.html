@@ -11,25 +11,27 @@
     <canvas></canvas>
     <span></span>
     <script>
-      video = document.querySelector('video');
-      canvas = document.querySelector('canvas');
-      canvas.width = 48;
-      canvas.height = 48;
-      canvas.style.filter = 'grayscale(1)';
-      video.style.transform = 'scaleX(-1)';
+    video = document.querySelector('video');
+    canvas = document.querySelector('canvas');
+    button = document.querySelector('button');
+    canvas.width = 48;
+    canvas.height = 48;
+    canvas.style.filter = 'grayscale(1)';
+    video.style.transform = 'scaleX(-1)';
 
-      span = document.querySelector('span');
-      span.style.fontSize = '48px';
+    span = document.querySelector('span');
+    span.style.fontSize = '48px';
 
-      const LABELS = {
-        0: '🤬', // angry
-        1: '🤢', // disgust
-        2: '😱', // fear
-        3: '😄', // happy
-        4: '😢', // sad
-        5: '😲', // surprise
-        6: '😐' // neutral
-      }
+    const LABELS = {
+      0: '🤬', // angry
+      1: '🤢', // disgust
+      2: '😱', // fear
+      3: '😄', // happy
+      4: '😢', // sad
+      5: '😲', // surprise
+      6: '😐' // neutral
+    }
+
     button.onclick = function() {
         w = video.videoWidth;
         h = video.videoHeight;
@@ -43,16 +45,8 @@
         span.innerHTML = '⌛';
         predict();
     };
-
-    function handleSuccess(stream) {
-      video.srcObject = stream;
-    }
-
-    function handleError(error) {
-      alert('navigator.MediaDevices.getUserMedia error: ' + error.message + error.name);
-    }
-
-     async function predict() {
+    
+    async function predict() {
         const model = await tf.loadLayersModel('./model/model.json');
 
         image = tf.browser.fromPixels(canvas);
@@ -68,6 +62,19 @@
 
         span.innerHTML = LABELS[i];
       }
+
+    constraints = {
+      audio: false,
+      video: true
+    };
+
+    function handleSuccess(stream) {
+      video.srcObject = stream;
+    }
+
+    function handleError(error) {
+      alert('navigator.MediaDevices.getUserMedia error: ' + error.message + error.name);
+    }
 
     navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
     </script>
